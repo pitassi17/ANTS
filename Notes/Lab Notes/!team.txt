@@ -1,0 +1,30 @@
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
+Team 'Lab Notes'
+
+These are decisions, thoughts, plans, etc. that the team worked on
+in groups of two or more team members.
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
+Considered using Prolog for the algorithm.
+
+Decided that Prolog would too difficult for us to work with and
+decided that Java would be best. Our team has solid experience
+coding with Java and it is quite fast compared to Python. We could
+potentially use C but we expect it would slow down development.
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
+Discussed input file formats. 
+
+Initial thoughts were to use XML or JSON formats in order to make
+reading the input easier for the program.
+
+Final decision was to use CSV format in order to make it easier
+for the client to edit the file. CSV can be opened in a spreadsheet
+editing program like Excel and it displays as a table.
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
+Discussed what software to use for our Agile development process.
+
+Decided on Pivotal Tracker since JIRA is not free unless you go
+through a lengthy process to prove it is being used for educational
+purposes. 
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
+...
+---=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=---
