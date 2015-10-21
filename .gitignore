@@ -5,6 +5,8 @@
 
 # Eclipse IDE metadata
 Program/.metadata/
+# Eclipse IDE settings
+Program/ANTS/.settings/
 
 # Package Files #
 *.jar
