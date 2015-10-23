@@ -9,17 +9,28 @@ import java.util.Dictionary;
 /**
  * @author Caleb Piekstra
  *
+ * This class allows for the storage of all information that
+ * is written in the program's input file by the end-user.
+ * 
+ * The program's scheduling algorithm will use this information
+ * to generate a schedule matching the constraints and preferences
+ * contained here.
  */
 public class ScheduleInformation {
+	// A list of all events in a semester
+	private ArrayList<Event> events = null;
 	
-	/* Instance variables */
-	private ArrayList<Event> events = null;		
+	// A list of all of the students in the class
 	private ArrayList<Participant> participants = null;
+	
+	// A list of timeslots (weekdays)
 	private Dictionary<String, Timeslot> timeslots = null;
+	
+	// A list of special date-ranges (used to override timeslots) 
 	private ArrayList<SpecialDaterange> specialDateranges = null;
 	
 	/**
-	 * Constructor
+	 * The constructor
 	 */
 	public ScheduleInformation() {	
 		// Put weekdays in the timeslots dict
@@ -31,7 +42,8 @@ public class ScheduleInformation {
 	}
 	
 	/**
-	 * Gets the list of events contained in the schedule information
+	 * Gets the list of events contained in the schedule 
+	 * information
 	 * 
 	 * @return The list of events
 	 */
@@ -49,7 +61,8 @@ public class ScheduleInformation {
 	}
 	
 	/**
-	 * Gets the list of participants contained in the schedule information
+	 * Gets the list of participants contained in the schedule 
+	 * information
 	 * 
 	 * @return The list of participants
 	 */
@@ -67,7 +80,8 @@ public class ScheduleInformation {
 	}
 	
 	/**
-	 * Gets the list of special dateranges contained in the schedule information
+	 * Gets the list of special dateranges contained in the 
+	 * schedule information
 	 * 
 	 * @return The list of special dateranges
 	 */
@@ -85,7 +99,8 @@ public class ScheduleInformation {
 	}
 	
 	/**
-	 * Gets the list of timeslots contained in the schedule information
+	 * Gets the list of timeslots contained in the schedule 
+	 * information
 	 * 
 	 * @return The list of timeslots
 	 */
@@ -96,7 +111,8 @@ public class ScheduleInformation {
 	/**
 	 * Gets a timeslot from the list of timeslots
 	 * 
-	 * @param weekday The day of the week corresponding to the desired timeslot
+	 * @param weekday The day of the week corresponding to the 
+	 * 	desired timeslot
 	 * @return The timeslot corresponding to weekday
 	 */
 	public Timeslot getTimeslot(String weekday) {
