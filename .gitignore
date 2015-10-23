@@ -3,6 +3,12 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Eclipse IDE metadata
+Program/.metadata/
+Program/.recommenders/
+# Eclipse IDE settings
+Program/ANTS/.settings/
+
 # Package Files #
 *.jar
 *.war
