@@ -1,5 +1,7 @@
 package main;
 
+import Input.*;
+
 /**
  * Main/mother class for ANTS. 
  * 
@@ -9,11 +11,10 @@ package main;
  *
  */
 public class Ants {
-
+	
 	public static void main(String[] args) {
-		for (String arg : args){
-			System.out.println(arg);
-		}
+		InputHandler ih = new InputHandler();
+		// Read/barf out the raw data for now
+		System.out.println(ih.readFile(args[0]));
 	}
-
 }
