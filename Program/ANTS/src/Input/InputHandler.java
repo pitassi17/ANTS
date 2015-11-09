@@ -29,7 +29,7 @@ public class InputHandler {
 	private Map<Event, EventParameters> events;
 	private ArrayList<Participant> participants;
 	private ArrayList<SpecialDaterange> specialDateranges;
-	private Dictionary <String, Timeslot> timeslots;
+	private Map<String, Timeslot> timeslots;
 	private ScheduleInformation scheduleInfo;
 
 	public InputHandler(File file) {
@@ -65,13 +65,23 @@ public class InputHandler {
 		specialDateranges = parseSpecialDateRanges();
 		
 		if (!specialDateranges.isEmpty()) {
-			System.out.println("List of Participants");
+			System.out.println("List of Special Date Ranges");
 			System.out.println("----------------");
 			for (SpecialDaterange sdr : specialDateranges){
 				System.out.println(sdr.getStartDate());
 			}
 		System.out.println("\n");
 		}
+		
+		timeslots = parseTimeSlots();
+		if (timeslots != null) {
+			System.out.println("List of Timeslots");
+			System.out.println("----------------");
+			for (Map.Entry<String, Timeslot> timeslot : timeslots.entrySet()) {
+				System.out.println(timeslot.getKey());
+			}
+		}
+		
 	}
 
 	private Map<Event, EventParameters> parseEvents(){
@@ -182,8 +192,56 @@ public class InputHandler {
 		return sdrList;
 	}
 
-	private Dictionary<String, Timeslot> parseTimeSlots() {
-		return null;
+	private Map<String, Timeslot> parseTimeSlots() {
+		HashMap<String, Timeslot> timeslots = new HashMap<String, Timeslot>();
+		try {
+
+			String timeslotStrLine;
+			FileInputStream fstream = new FileInputStream(inputfile);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+			while ((timeslotStrLine = br.readLine()) != null && !timeslotStrLine.contains("TIMESLOT_DAY")) {
+				// Skip until we find timeslot section
+			}
+
+			/**
+			 * When splitting strings with inner quotes, this ugly regex
+			 * is the only way to keep the data intact.
+			 * 
+			 * Source: http://stackoverflow.com/a/1757107
+			 */
+			String[] timeslotData = br.readLine().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+			String[] softLimits = timeslotData[2].split(",");
+			String[] hardLimits = timeslotData[3].split(",");
+			
+			while (softLimits.length > 1 && hardLimits.length > 1) {
+				// When inner quotes are split, min comes out as "#
+				// and max comes out as #", so we need to delete extra quote.
+				String softmin = softLimits[0].replace("\"", "");
+				String softmax = softLimits[1].replace("\"", "");
+				String hardmin = hardLimits[0].replace("\"", "");
+				String hardmax = hardLimits[1].replace("\"", "");
+				
+				Timeslot ts = new Timeslot(timeslotData[0],
+										   Integer.parseInt(softmin),
+										   Integer.parseInt(softmax),
+										   Integer.parseInt(hardmin),
+										   Integer.parseInt(hardmax));
+				timeslots.put(timeslotData[0], ts);
+				timeslotData = br.readLine().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+				softLimits = timeslotData[2].split(",");
+				hardLimits = timeslotData[3].split(",");
+			}
+
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return timeslots;
 	}
 
 	public void createScheduleInformation() {
