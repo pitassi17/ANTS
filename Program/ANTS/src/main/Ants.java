@@ -17,5 +17,7 @@ public class Ants {
 	public static void main(String[] args) {
 		InputHandler ih = new InputHandler(new File(args[0]));
 		ih.readFile();
+		ih.createScheduleInformation();
+		ih.getScheduleInformation();
 	}
 }

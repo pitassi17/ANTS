@@ -10,9 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -37,9 +34,9 @@ public class InputHandler {
 	}
 
 	/**
-	 * Reads the raw data from the CSV file and barfs it out as a string.
-	 * <br>	<br>
-	 * TODO: Will eventually filter out data into a ScheduleInformation object.
+	 * Reads the raw data from the CSV file.
+	 * 
+	 * TODO: Remove debug print info eventually.
 	 * 
 	 */
 	public void readFile() {
@@ -245,9 +242,27 @@ public class InputHandler {
 	}
 
 	public void createScheduleInformation() {
+		scheduleInfo = new ScheduleInformation();
+		
+		for (Map.Entry<Event, EventParameters> entry : events.entrySet()) {
+			scheduleInfo.addEvent(entry.getKey());
+		}
+		
+		for (Participant p : participants){
+			scheduleInfo.addParticipant(p);
+		}
+		
+		for (SpecialDaterange sdr : specialDateranges){
+			scheduleInfo.addspecialDaterange(sdr);
+		}
+		
+		for (Map.Entry<String, Timeslot> timeslot : timeslots.entrySet()) {
+			scheduleInfo.setTimeslot(timeslot.getKey(), timeslot.getValue());
+		}
+		
 	}
 
 	public ScheduleInformation getScheduleInformation() {
-		return null;
+		return scheduleInfo;
 	}
 }
