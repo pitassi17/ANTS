@@ -21,7 +21,7 @@ import java.util.Map;
 public class InputHandler {
 
 	private File inputfile;
-	private Dictionary<Event, EventParameters> events;
+	private Map<Event, EventParameters> events;
 	private ArrayList<Participant> participants;
 	private ArrayList<SpecialDaterange> specialDateranges;
 	private Dictionary <String, Timeslot> timeslots;
@@ -38,7 +38,7 @@ public class InputHandler {
 	 * 
 	 */
 	public void readFile() {
-		Map<Event, EventParameters> events = parseEvents();	
+		events = parseEvents();	
 		if (events != null) {
 			System.out.println("List of Events");
 			System.out.println("----------------");
@@ -46,6 +46,16 @@ public class InputHandler {
 				System.out.println(entry.getKey().getEventName());
 			}
 		}
+		System.out.println("\n");
+		participants = parseParticipants();
+		if (!participants.isEmpty()){
+			System.out.println("List of Participants");
+			System.out.println("----------------");
+			for (Participant p : participants){
+				System.out.println(p.getName());
+			}
+		}
+		System.out.println("\n");
 	}
 
 	private Map<Event, EventParameters> parseEvents(){
@@ -85,7 +95,34 @@ public class InputHandler {
 	}
 
 	private ArrayList<Participant> parseParticipants() {
-		return null;
+		ArrayList<Participant> partList = new ArrayList<Participant>();
+		try {
+
+			String partStrLine;
+			FileInputStream fstream = new FileInputStream(inputfile);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+			while ((partStrLine = br.readLine()) != null && !partStrLine.contains("PERSON_NAME")) {
+				// Skip until we find participants
+			}
+
+			String[] participantData = br.readLine().split(",");
+			while (participantData.length != 0) {
+				Participant part = new Participant(participantData[0]);
+				partList.add(part);
+				participantData = br.readLine().split(",");
+			}
+
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return partList;
 	}
 
 	private ArrayList<SpecialDaterange> parseSpecialDateRanges() {
