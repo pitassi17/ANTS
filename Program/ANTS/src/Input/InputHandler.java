@@ -6,10 +6,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -56,6 +61,17 @@ public class InputHandler {
 			}
 		}
 		System.out.println("\n");
+		
+		specialDateranges = parseSpecialDateRanges();
+		
+		if (!specialDateranges.isEmpty()) {
+			System.out.println("List of Participants");
+			System.out.println("----------------");
+			for (SpecialDaterange sdr : specialDateranges){
+				System.out.println(sdr.getStartDate());
+			}
+		System.out.println("\n");
+		}
 	}
 
 	private Map<Event, EventParameters> parseEvents(){
@@ -126,7 +142,44 @@ public class InputHandler {
 	}
 
 	private ArrayList<SpecialDaterange> parseSpecialDateRanges() {
-		return null;
+		ArrayList<SpecialDaterange> sdrList = new ArrayList<SpecialDaterange>();
+		try {
+
+			String sdrStrLine;
+			FileInputStream fstream = new FileInputStream(inputfile);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+			while ((sdrStrLine = br.readLine()) != null && !sdrStrLine.contains("SPECIAL_DATE_START")) {
+				// Skip until we find special date ranges section
+			}
+
+			String[] specialDateRangeData = br.readLine().split(",");
+			while (specialDateRangeData.length != 0) {
+				DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+				SpecialDaterange sdr = 
+						new SpecialDaterange(format.parse(specialDateRangeData[0]),
+											format.parse(specialDateRangeData[1]),
+											 Boolean.parseBoolean(specialDateRangeData[2]),
+											 "");
+				sdrList.add(sdr);
+				// TODO NullPointExceptions here after reading last date. Dunno why.
+				specialDateRangeData = br.readLine().split(",");
+			}
+
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e) { // TODO Remove NPE catch after figuring out why it does that.
+			return sdrList;
+		}
+		return sdrList;
 	}
 
 	private Dictionary<String, Timeslot> parseTimeSlots() {
