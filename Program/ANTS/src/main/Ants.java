@@ -1,5 +1,7 @@
 package main;
 
+import java.io.File;
+
 import Input.*;
 
 /**
@@ -13,8 +15,7 @@ import Input.*;
 public class Ants {
 	
 	public static void main(String[] args) {
-		InputHandler ih = new InputHandler();
-		// Read/barf out the raw data for now
-		System.out.println(ih.readFile(args[0]));
+		InputHandler ih = new InputHandler(new File(args[0]));
+		ih.readFile();
 	}
 }
