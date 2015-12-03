@@ -4,7 +4,7 @@
 package Input;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
+import java.util.HashMap;
 
 /**
  * @author Caleb Piekstra
@@ -18,22 +18,22 @@ import java.util.Dictionary;
  */
 public class ScheduleInformation {
 	// A list of all events in a semester
-	private ArrayList<Event> events = null;
+	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	// A list of all of the students in the class
-	private ArrayList<Participant> participants = null;
+	private ArrayList<Participant> participants = new ArrayList<Participant>();
 	
 	// A list of timeslots (weekdays)
-	private Dictionary<String, Timeslot> timeslots = null;
+	private HashMap<String, Timeslot> timeslots = new HashMap<String, Timeslot>();
 	
 	// A list of special date-ranges (used to override timeslots) 
-	private ArrayList<SpecialDaterange> specialDateranges = null;
+	private ArrayList<SpecialDaterange> specialDateranges = new ArrayList<SpecialDaterange>();
 	
 	/**
 	 * The constructor
 	 */
 	public ScheduleInformation() {	
-		// Put weekdays in the timeslots dict
+//		// Put weekdays in the timeslots dict
 		this.timeslots.put("Monday", null);
 		this.timeslots.put("Tuesday", null);
 		this.timeslots.put("Wednesday", null);
@@ -104,7 +104,7 @@ public class ScheduleInformation {
 	 * 
 	 * @return The list of timeslots
 	 */
-	public Dictionary<String, Timeslot> getTimeslots() {
+	public HashMap<String, Timeslot> getTimeslots() {
 		return this.timeslots;
 	}
 	
