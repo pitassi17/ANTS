@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Input;
+package input;
 
 /**
  * @author Caleb Piekstra
