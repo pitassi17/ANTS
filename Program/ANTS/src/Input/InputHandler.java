@@ -25,7 +25,7 @@ public class InputHandler {
 	private File inputfile;
 	private Map<Event, EventParameters> events;
 	private ArrayList<Participant> participants;
-	private ArrayList<SpecialDaterange> specialDateranges;
+	private ArrayList<SpecialDateRange> specialDateranges;
 	private Map<String, Timeslot> timeslots;
 	private ScheduleInformation scheduleInfo;
 
@@ -64,7 +64,7 @@ public class InputHandler {
 		if (!specialDateranges.isEmpty()) {
 			System.out.println("List of Special Date Ranges");
 			System.out.println("----------------");
-			for (SpecialDaterange sdr : specialDateranges){
+			for (SpecialDateRange sdr : specialDateranges){
 				System.out.println(sdr.getStartDate());
 			}
 		System.out.println("\n");
@@ -148,8 +148,8 @@ public class InputHandler {
 		return partList;
 	}
 
-	private ArrayList<SpecialDaterange> parseSpecialDateRanges() {
-		ArrayList<SpecialDaterange> sdrList = new ArrayList<SpecialDaterange>();
+	private ArrayList<SpecialDateRange> parseSpecialDateRanges() {
+		ArrayList<SpecialDateRange> sdrList = new ArrayList<SpecialDateRange>();
 		try {
 
 			String sdrStrLine;
@@ -163,8 +163,8 @@ public class InputHandler {
 			String[] specialDateRangeData = br.readLine().split(",");
 			while (specialDateRangeData.length != 0) {
 				DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-				SpecialDaterange sdr = 
-						new SpecialDaterange(format.parse(specialDateRangeData[0]),
+				SpecialDateRange sdr = 
+						new SpecialDateRange(format.parse(specialDateRangeData[0]),
 											format.parse(specialDateRangeData[1]),
 											 Boolean.parseBoolean(specialDateRangeData[2]),
 											 "");
@@ -252,7 +252,7 @@ public class InputHandler {
 			scheduleInfo.addParticipant(p);
 		}
 		
-		for (SpecialDaterange sdr : specialDateranges){
+		for (SpecialDateRange sdr : specialDateranges){
 			scheduleInfo.addspecialDaterange(sdr);
 		}
 		

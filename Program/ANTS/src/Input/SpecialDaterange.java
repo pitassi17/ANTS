@@ -14,7 +14,7 @@ import java.util.Date;
  * Special date ranges can be a single day or more, as the
  * dates in the range are inclusive.
  */
-public class SpecialDaterange {
+public class SpecialDateRange {
 	// The first date (inclusive) in the date range
 	private final Date startDate;
 	// The final date (inclusive) in the date range
@@ -40,7 +40,7 @@ public class SpecialDaterange {
 	 * 	this date range
 	 * @param name The name of the date range
 	 */
-	public SpecialDaterange(Date startDate, Date endDate, 
+	public SpecialDateRange(Date startDate, Date endDate, 
 			boolean noEvents, String name) {
 		this.startDate = startDate;
 		this.endDate = endDate;

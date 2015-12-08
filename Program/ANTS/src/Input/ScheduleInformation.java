@@ -27,7 +27,7 @@ public class ScheduleInformation {
 	private HashMap<String, Timeslot> timeslots = new HashMap<String, Timeslot>();
 	
 	// A list of special date-ranges (used to override timeslots) 
-	private ArrayList<SpecialDaterange> specialDateranges = new ArrayList<SpecialDaterange>();
+	private ArrayList<SpecialDateRange> specialDateranges = new ArrayList<SpecialDateRange>();
 	
 	/**
 	 * The constructor
@@ -85,7 +85,7 @@ public class ScheduleInformation {
 	 * 
 	 * @return The list of special dateranges
 	 */
-	public ArrayList<SpecialDaterange> getSpecialDateranges() {
+	public ArrayList<SpecialDateRange> getSpecialDateranges() {
 		return this.specialDateranges;
 	}
 	
@@ -94,7 +94,7 @@ public class ScheduleInformation {
 	 * 
 	 * @param specDate The special daterange to add
 	 */
-	public void addspecialDaterange(SpecialDaterange specDate) {
+	public void addspecialDaterange(SpecialDateRange specDate) {
 		this.specialDateranges.add(specDate);
 	}
 	
