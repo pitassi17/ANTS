@@ -2,7 +2,7 @@ package main;
 
 import java.io.File;
 
-import Input.*;
+import input.*;
 
 /**
  * Main/mother class for ANTS. 
